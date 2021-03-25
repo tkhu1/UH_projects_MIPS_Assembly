@@ -1,0 +1,439 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; Write Your Macro Here
+    2 00000000                 MACRO
+    3 00000000         
+    4 00000000         $GetArrSumAvg
+                               ArrCalc          $resultSum, $resultAvg, $inputP
+tr, $inputSize
+    5 00000000         $GetArrSumAvg
+    6 00000000         
+    7 00000000                 LDR              R0, $inputPtr
+    8 00000000                 LDR              R1, $inputSize
+    9 00000000                 LDR              R4, $inputSize ;copies array si
+                                                            ze to R4 for temp u
+                                                            se
+   10 00000000         
+   11 00000000                 MOV              R2, #0      ;resets temp regist
+                                                            ers
+   12 00000000                 MOV              R3, #0
+   13 00000000         
+   14 00000000         $GetArrSumAvg.loop
+   15 00000000                 CMP              R1, #0      ;if input size = 0,
+                                                             exit loop
+   16 00000000                 BEQ              $GetArrSumAvg.stop
+   17 00000000                 LDR              R2, [R0], #4 ;loads value from 
+                                                            array into R2
+   18 00000000                 ADD              $resultSum, R2 ;adds values to 
+                                                            sum result register
+                                                            
+   19 00000000                 ADD              R3, R2      ;adds values to tem
+                                                            p avg register
+   20 00000000                 SUB              R1, R1, #1  ;decrements array s
+                                                            ize for exit cond.
+   21 00000000         
+   22 00000000                 BNE              $GetArrSumAvg.loop
+   23 00000000         
+   24 00000000         $GetArrSumAvg.stop
+   25 00000000                 SDIV             $resultAvg, R3, R4 ;divides to 
+                                                            find avg
+   26 00000000         
+   27 00000000                 MEND
+   28 00000000         
+   29 00000000                 AREA             Lab_12_YourFirstName_YourLastNa
+me, CODE, READONLY
+   30 00000000                 EXPORT           __main
+   31 00000000         
+   32 00000000 00000003 
+              FFFFFFF9 
+              00000002 
+              FFFFFFFD 
+              0000000A Array_1 DCD              3, -7, 2, -3, 10
+   33 00000014 00000005 
+                       Array_1_Size
+                               DCD              5
+   34 00000018 00000000 
+                       Array_1_Pointer
+                               DCD              Array_1
+   35 0000001C         
+   36 0000001C FFFFFFF8 
+              FFFFFFD5 
+              FFFFFFFD Array_2 DCD              -8, -43, -3
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   37 00000028 00000003 
+                       Array_2_Size
+                               DCD              3
+   38 0000002C 00000000 
+                       Array_2_Pointer
+                               DCD              Array_2
+   39 00000030         
+   40 00000030 00000009 
+              00000022 
+              00000002 
+              00000006 
+              00000002 
+              00000008 
+              00000002 Array_3 DCD              9, 34, 2, 6, 2, 8, 2
+   41 0000004C 00000007 
+                       Array_3_Size
+                               DCD              7
+   42 00000050 00000000 
+                       Array_3_Pointer
+                               DCD              Array_3
+   43 00000054         
+   44 00000054         __main
+   45 00000054         
+   46 00000054         Arr1_SumAvg
+                               ArrCalc          R5, R6, Array_1_Pointer, Array_
+1_Size
+    5 00000054         Arr1_SumAvg
+    6 00000054         
+    7 00000054 F85F 0040       LDR              R0, Array_1_Pointer
+    8 00000058 F85F 1048       LDR              R1, Array_1_Size
+    9 0000005C F85F 404C       LDR              R4, Array_1_Size ;copies array 
+                                                            size to R4 for temp
+                                                             use
+   10 00000060         
+   11 00000060 F04F 0200       MOV              R2, #0      ;resets temp regist
+                                                            ers
+   12 00000064 F04F 0300       MOV              R3, #0
+   13 00000068         
+   14 00000068         Arr1_SumAvgloop
+   15 00000068 2900            CMP              R1, #0      ;if input size = 0,
+                                                             exit loop
+   16 0000006A D006            BEQ              Arr1_SumAvgstop
+   17 0000006C F850 2B04       LDR              R2, [R0], #4 ;loads value from 
+                                                            array into R2
+   18 00000070 4415            ADD              R5, R2      ;adds values to sum
+                                                             result register
+   19 00000072 4413            ADD              R3, R2      ;adds values to tem
+                                                            p avg register
+   20 00000074 F1A1 0101       SUB              R1, R1, #1  ;decrements array s
+                                                            ize for exit cond.
+   21 00000078         
+   22 00000078 D1F6            BNE              Arr1_SumAvgloop
+   23 0000007A         
+   24 0000007A         Arr1_SumAvgstop
+   25 0000007A FB93 F6F4       SDIV             R6, R3, R4  ;divides to find av
+                                                            g
+   26 0000007E         
+   47 0000007E         Arr2_SumAvg
+                               ArrCalc          R7, R8, Array_2_Pointer, Array_
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+2_Size
+    5 0000007E         Arr2_SumAvg
+    6 0000007E         
+    7 0000007E F85F 0054       LDR              R0, Array_2_Pointer
+    8 00000082 F85F 105C       LDR              R1, Array_2_Size
+    9 00000086 F85F 4060       LDR              R4, Array_2_Size ;copies array 
+                                                            size to R4 for temp
+                                                             use
+   10 0000008A         
+   11 0000008A F04F 0200       MOV              R2, #0      ;resets temp regist
+                                                            ers
+   12 0000008E F04F 0300       MOV              R3, #0
+   13 00000092         
+   14 00000092         Arr2_SumAvgloop
+   15 00000092 2900            CMP              R1, #0      ;if input size = 0,
+                                                             exit loop
+   16 00000094 D006            BEQ              Arr2_SumAvgstop
+   17 00000096 F850 2B04       LDR              R2, [R0], #4 ;loads value from 
+                                                            array into R2
+   18 0000009A 4417            ADD              R7, R2      ;adds values to sum
+                                                             result register
+   19 0000009C 4413            ADD              R3, R2      ;adds values to tem
+                                                            p avg register
+   20 0000009E F1A1 0101       SUB              R1, R1, #1  ;decrements array s
+                                                            ize for exit cond.
+   21 000000A2         
+   22 000000A2 D1F6            BNE              Arr2_SumAvgloop
+   23 000000A4         
+   24 000000A4         Arr2_SumAvgstop
+   25 000000A4 FB93 F8F4       SDIV             R8, R3, R4  ;divides to find av
+                                                            g
+   26 000000A8         
+   48 000000A8         Arr3_SumAvg
+                               ArrCalc          R9, R10, Array_3_Pointer, Array
+_3_Size
+    5 000000A8         Arr3_SumAvg
+    6 000000A8         
+    7 000000A8 F85F 005C       LDR              R0, Array_3_Pointer
+    8 000000AC F85F 1064       LDR              R1, Array_3_Size
+    9 000000B0 F85F 4068       LDR              R4, Array_3_Size ;copies array 
+                                                            size to R4 for temp
+                                                             use
+   10 000000B4         
+   11 000000B4 F04F 0200       MOV              R2, #0      ;resets temp regist
+                                                            ers
+   12 000000B8 F04F 0300       MOV              R3, #0
+   13 000000BC         
+   14 000000BC         Arr3_SumAvgloop
+   15 000000BC 2900            CMP              R1, #0      ;if input size = 0,
+                                                             exit loop
+   16 000000BE D006            BEQ              Arr3_SumAvgstop
+   17 000000C0 F850 2B04       LDR              R2, [R0], #4 ;loads value from 
+                                                            array into R2
+   18 000000C4 4491            ADD              R9, R2      ;adds values to sum
+                                                             result register
+   19 000000C6 4413            ADD              R3, R2      ;adds values to tem
+                                                            p avg register
+   20 000000C8 F1A1 0101       SUB              R1, R1, #1  ;decrements array s
+                                                            ize for exit cond.
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+   21 000000CC         
+   22 000000CC D1F6            BNE              Arr3_SumAvgloop
+   23 000000CE         
+   24 000000CE         Arr3_SumAvgstop
+   25 000000CE FB93 FAF4       SDIV             R10, R3, R4 ;divides to find av
+                                                            g
+   26 000000D2         
+   49 000000D2         
+   50 000000D2 E7FE    stop    B                stop
+   51 000000D4                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assembly.d -o.\objects\assembly.o -I.\RTE\_Target_1 -IC:
+\Users\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Us
+ers\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include --p
+redefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="
+_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --list=.\listings\assembly.lst Assemb
+ly.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Arr1_SumAvg 00000054
+
+Symbol: Arr1_SumAvg
+   Definitions
+      At line 5 in macro ArrCalc
+      at line 46 in file Assembly.s
+   Uses
+      None
+Comment: Arr1_SumAvg unused
+Arr1_SumAvgloop 00000068
+
+Symbol: Arr1_SumAvgloop
+   Definitions
+      At line 14 in macro ArrCalc
+      at line 46 in file Assembly.s
+   Uses
+      At line 22 in macro ArrCalc
+      at line 46 in file Assembly.s
+Comment: Arr1_SumAvgloop used once
+Arr1_SumAvgstop 0000007A
+
+Symbol: Arr1_SumAvgstop
+   Definitions
+      At line 24 in macro ArrCalc
+      at line 46 in file Assembly.s
+   Uses
+      At line 16 in macro ArrCalc
+      at line 46 in file Assembly.s
+Comment: Arr1_SumAvgstop used once
+Arr2_SumAvg 0000007E
+
+Symbol: Arr2_SumAvg
+   Definitions
+      At line 5 in macro ArrCalc
+      at line 47 in file Assembly.s
+   Uses
+      None
+Comment: Arr2_SumAvg unused
+Arr2_SumAvgloop 00000092
+
+Symbol: Arr2_SumAvgloop
+   Definitions
+      At line 14 in macro ArrCalc
+      at line 47 in file Assembly.s
+   Uses
+      At line 22 in macro ArrCalc
+      at line 47 in file Assembly.s
+Comment: Arr2_SumAvgloop used once
+Arr2_SumAvgstop 000000A4
+
+Symbol: Arr2_SumAvgstop
+   Definitions
+      At line 24 in macro ArrCalc
+      at line 47 in file Assembly.s
+   Uses
+      At line 16 in macro ArrCalc
+      at line 47 in file Assembly.s
+Comment: Arr2_SumAvgstop used once
+Arr3_SumAvg 000000A8
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+
+Symbol: Arr3_SumAvg
+   Definitions
+      At line 5 in macro ArrCalc
+      at line 48 in file Assembly.s
+   Uses
+      None
+Comment: Arr3_SumAvg unused
+Arr3_SumAvgloop 000000BC
+
+Symbol: Arr3_SumAvgloop
+   Definitions
+      At line 14 in macro ArrCalc
+      at line 48 in file Assembly.s
+   Uses
+      At line 22 in macro ArrCalc
+      at line 48 in file Assembly.s
+Comment: Arr3_SumAvgloop used once
+Arr3_SumAvgstop 000000CE
+
+Symbol: Arr3_SumAvgstop
+   Definitions
+      At line 24 in macro ArrCalc
+      at line 48 in file Assembly.s
+   Uses
+      At line 16 in macro ArrCalc
+      at line 48 in file Assembly.s
+Comment: Arr3_SumAvgstop used once
+Array_1 00000000
+
+Symbol: Array_1
+   Definitions
+      At line 32 in file Assembly.s
+   Uses
+      At line 34 in file Assembly.s
+Comment: Array_1 used once
+Array_1_Pointer 00000018
+
+Symbol: Array_1_Pointer
+   Definitions
+      At line 34 in file Assembly.s
+   Uses
+      At line 7 in macro ArrCalc
+      at line 46 in file Assembly.s
+Comment: Array_1_Pointer used once
+Array_1_Size 00000014
+
+Symbol: Array_1_Size
+   Definitions
+      At line 33 in file Assembly.s
+   Uses
+      At line 8 in macro ArrCalc
+      at line 46 in file Assembly.s
+      At line 9 in macro ArrCalc
+      at line 46 in file Assembly.s
+
+Array_2 0000001C
+
+Symbol: Array_2
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 36 in file Assembly.s
+   Uses
+      At line 38 in file Assembly.s
+Comment: Array_2 used once
+Array_2_Pointer 0000002C
+
+Symbol: Array_2_Pointer
+   Definitions
+      At line 38 in file Assembly.s
+   Uses
+      At line 7 in macro ArrCalc
+      at line 47 in file Assembly.s
+Comment: Array_2_Pointer used once
+Array_2_Size 00000028
+
+Symbol: Array_2_Size
+   Definitions
+      At line 37 in file Assembly.s
+   Uses
+      At line 8 in macro ArrCalc
+      at line 47 in file Assembly.s
+      At line 9 in macro ArrCalc
+      at line 47 in file Assembly.s
+
+Array_3 00000030
+
+Symbol: Array_3
+   Definitions
+      At line 40 in file Assembly.s
+   Uses
+      At line 42 in file Assembly.s
+Comment: Array_3 used once
+Array_3_Pointer 00000050
+
+Symbol: Array_3_Pointer
+   Definitions
+      At line 42 in file Assembly.s
+   Uses
+      At line 7 in macro ArrCalc
+      at line 48 in file Assembly.s
+Comment: Array_3_Pointer used once
+Array_3_Size 0000004C
+
+Symbol: Array_3_Size
+   Definitions
+      At line 41 in file Assembly.s
+   Uses
+      At line 8 in macro ArrCalc
+      at line 48 in file Assembly.s
+      At line 9 in macro ArrCalc
+      at line 48 in file Assembly.s
+
+Lab_12_YourFirstName_YourLastName 00000000
+
+Symbol: Lab_12_YourFirstName_YourLastName
+   Definitions
+      At line 29 in file Assembly.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
+      None
+Comment: Lab_12_YourFirstName_YourLastName unused
+__main 00000054
+
+Symbol: __main
+   Definitions
+      At line 44 in file Assembly.s
+   Uses
+      At line 30 in file Assembly.s
+Comment: __main used once
+stop 000000D2
+
+Symbol: stop
+   Definitions
+      At line 50 in file Assembly.s
+   Uses
+      At line 50 in file Assembly.s
+Comment: stop used once
+21 symbols
+355 symbols in table

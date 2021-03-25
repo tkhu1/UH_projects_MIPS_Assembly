@@ -1,0 +1,90 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             Lab_08_Tyler_Hu, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000         
+    4 00000000         __main
+    5 00000000         
+    6 00000000 4807            LDR              R0, =0x7E0C0A2B ;assigns large 
+                                                            value to R0.
+    7 00000002 F04F 0100       MOV              R1, #0      ;holds solution
+    8 00000006         
+    9 00000006         loop
+   10 00000006 2800            CMP              R0, #0
+   11 00000008 D008            BEQ              exitLoop    ;exits loop if R0 i
+                                                            s 0
+   12 0000000A FAB0 F280       CLZ              R2, R0      ;counts leading zer
+                                                            os and puts in R2
+   13 0000000E F102 0201       ADD              R2, #1      ;number of leading 
+                                                            zeros + 1
+   14 00000012 F101 0101       ADD              R1, #1      ;adds loop iteratio
+                                                            n counter to soluti
+                                                            on
+   15 00000016 FA00 F002       LSL              R0, R2      ;shifts R0
+   16 0000001A D1F4            BNE              loop
+   17 0000001C         
+   18 0000001C         exitLoop
+   19 0000001C         
+   20 0000001C E7FE    stop    B                stop
+   21 0000001E         
+   22 0000001E                 END
+              00 00 7E0C0A2B 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assembly.d -o.\objects\assembly.o -I.\RTE\_Target_1 -IC:
+\Users\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Us
+ers\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include --p
+redefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="
+_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --list=.\listings\assembly.lst Assemb
+ly.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Lab_08_Tyler_Hu 00000000
+
+Symbol: Lab_08_Tyler_Hu
+   Definitions
+      At line 1 in file Assembly.s
+   Uses
+      None
+Comment: Lab_08_Tyler_Hu unused
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file Assembly.s
+   Uses
+      At line 2 in file Assembly.s
+Comment: __main used once
+exitLoop 0000001C
+
+Symbol: exitLoop
+   Definitions
+      At line 18 in file Assembly.s
+   Uses
+      At line 11 in file Assembly.s
+Comment: exitLoop used once
+loop 00000006
+
+Symbol: loop
+   Definitions
+      At line 9 in file Assembly.s
+   Uses
+      At line 16 in file Assembly.s
+Comment: loop used once
+stop 0000001C
+
+Symbol: stop
+   Definitions
+      At line 20 in file Assembly.s
+   Uses
+      At line 20 in file Assembly.s
+Comment: stop used once
+5 symbols
+341 symbols in table

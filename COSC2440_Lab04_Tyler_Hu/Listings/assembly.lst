@@ -1,0 +1,99 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             Lab_04_Tyler_Hu, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000         
+    4 00000000         __main
+    5 00000000         
+    6 00000000 F06F 0105       MOV              R1, #-6
+    7 00000004 F06F 0211       MOV              R2, #-18
+    8 00000008         
+    9 00000008 000B            MOVS             R3, R1
+   10 0000000A BFB8 424B       RSBLT            R3, R1, #0
+   11 0000000E         
+   12 0000000E 0014            MOVS             R4, R2
+   13 00000010 BFB8 4254       RSBLT            R4, R2, #0
+   14 00000014         
+   15 00000014 42A3            CMP              R3, R4
+   16 00000016 DC0F            BGT              goToElse
+   17 00000018         
+   18 00000018 F04F 0500       MOV              R5, #0
+   19 0000001C 461E            MOV              R6, R3
+   20 0000001E         
+   21 0000001E         loopSummation
+   22 0000001E 42A6            CMP              R6, R4
+   23 00000020         
+   24 00000020 EB03 0704       ADD              R7, R3, R4
+   25 00000024 F107 0732       ADD              R7, R7, #50
+   26 00000028 EBA7 0706       SUB              R7, R7, R6
+   27 0000002C EBA7 0706       SUB              R7, R7, R6
+   28 00000030         
+   29 00000030 443D            ADD              R5, R5, R7
+   30 00000032         
+   31 00000032 BFD8 1C76       ADDLE            R6, R6, #1
+   32 00000036 DBF2            BLT              loopSummation
+   33 00000038         
+   34 00000038         goToElse
+   35 00000038         
+   36 00000038 E7FE    stop    B                stop
+   37 0000003A         
+   38 0000003A                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assembly.d -o.\objects\assembly.o -I.\RTE\_Target_1 -IC:
+\Users\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Us
+ers\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include --p
+redefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="
+_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --list=.\listings\assembly.lst Assemb
+ly.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Lab_04_Tyler_Hu 00000000
+
+Symbol: Lab_04_Tyler_Hu
+   Definitions
+      At line 1 in file Assembly.s
+   Uses
+      None
+Comment: Lab_04_Tyler_Hu unused
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file Assembly.s
+   Uses
+      At line 2 in file Assembly.s
+Comment: __main used once
+goToElse 00000038
+
+Symbol: goToElse
+   Definitions
+      At line 34 in file Assembly.s
+   Uses
+      At line 16 in file Assembly.s
+Comment: goToElse used once
+loopSummation 0000001E
+
+Symbol: loopSummation
+   Definitions
+      At line 21 in file Assembly.s
+   Uses
+      At line 32 in file Assembly.s
+Comment: loopSummation used once
+stop 00000038
+
+Symbol: stop
+   Definitions
+      At line 36 in file Assembly.s
+   Uses
+      At line 36 in file Assembly.s
+Comment: stop used once
+5 symbols
+339 symbols in table

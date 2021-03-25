@@ -1,0 +1,104 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             Lab_05_Tyler_Hu, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000         
+    4 00000000         __main
+    5 00000000         
+    6 00000000 4668            MOV              R0, SP      ;R0 holds base ptr
+    7 00000002 F04F 0101       MOV              R1, #1      ;loop incrementer
+    8 00000006 F04F 0210       MOV              R2, #16     ;loop max iteration
+                                                            
+    9 0000000A F04F 0300       MOV              R3, #0      ;holds sum of array
+                                                             values
+   10 0000000E         
+   11 0000000E         storeValuesLoop
+   12 0000000E F840 1B04       STR              R1, [R0], #4 ;stores R1 into ar
+                                                            ray via auto increm
+                                                            ent
+   13 00000012 F101 0101       ADD              R1, #1
+   14 00000016 4291            CMP              R1, R2
+   15 00000018 DDF9            BLE              storeValuesLoop 
+                                                            ;loops if R1 <= R2
+   16 0000001A         
+   17 0000001A F04F 0108       MOV              R1, #8      ;resets R1 to start
+                                                             from the middle fo
+                                                            r the 2nd loop
+   18 0000001E 4668            MOV              R0, SP      ;resets base ptr
+   19 00000020 F840 5B1C       STR              R5, [R0], #28 ;moves ptr to ele
+                                                            ment 7 in array
+   20 00000024         
+   21 00000024         readValuesLoop
+   22 00000024 F850 4B04       LDR              R4, [R0], #4 ;loads array value
+                                                             into R4 via auto i
+                                                            ncrement
+   23 00000028 4423            ADD              R3, R4      ;adds the value in 
+                                                            [R4] to the sum [R3
+                                                            ]
+   24 0000002A F101 0101       ADD              R1, #1
+   25 0000002E 4291            CMP              R1, R2
+   26 00000030 DDF8            BLE              readValuesLoop 
+                                                            ;loops if R1 <= R2
+   27 00000032         
+   28 00000032 E7FE    stop    B                stop
+   29 00000034         
+   30 00000034                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assembly.d -o.\objects\assembly.o -I.\RTE\_Target_1 -IC:
+\Users\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Us
+ers\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include --p
+redefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="
+_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --list=.\listings\assembly.lst Assemb
+ly.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Lab_05_Tyler_Hu 00000000
+
+Symbol: Lab_05_Tyler_Hu
+   Definitions
+      At line 1 in file Assembly.s
+   Uses
+      None
+Comment: Lab_05_Tyler_Hu unused
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file Assembly.s
+   Uses
+      At line 2 in file Assembly.s
+Comment: __main used once
+readValuesLoop 00000024
+
+Symbol: readValuesLoop
+   Definitions
+      At line 21 in file Assembly.s
+   Uses
+      At line 26 in file Assembly.s
+Comment: readValuesLoop used once
+stop 00000032
+
+Symbol: stop
+   Definitions
+      At line 28 in file Assembly.s
+   Uses
+      At line 28 in file Assembly.s
+Comment: stop used once
+storeValuesLoop 0000000E
+
+Symbol: storeValuesLoop
+   Definitions
+      At line 11 in file Assembly.s
+   Uses
+      At line 15 in file Assembly.s
+Comment: storeValuesLoop used once
+5 symbols
+339 symbols in table

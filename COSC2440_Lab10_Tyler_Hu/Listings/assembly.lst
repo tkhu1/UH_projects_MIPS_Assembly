@@ -1,0 +1,72 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             Lab_10_Tyler_Hu, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000         
+    4 00000000         __main
+    5 00000000         
+    6 00000000 4803            LDR              R0, =0x2345ABCD ;assigns large 
+                                                            value to R0.
+    7 00000002 F04F 0100       MOV              R1, #0
+    8 00000006         
+    9 00000006         loop
+   10 00000006 0840            LSRS             R0, R0, #1
+   11 00000008 F141 0100       ADC              R1, R1, #0
+   12 0000000C         
+   13 0000000C D1FB            BNE              loop
+   14 0000000E         
+   15 0000000E E7FE    stop    B                stop
+   16 00000010         
+   17 00000010                 END
+              2345ABCD 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assembly.d -o.\objects\assembly.o -I.\RTE\_Target_1 -IC:
+\Users\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Us
+ers\Tyler\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include --p
+redefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="
+_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --list=.\listings\assembly.lst Assemb
+ly.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Lab_10_Tyler_Hu 00000000
+
+Symbol: Lab_10_Tyler_Hu
+   Definitions
+      At line 1 in file Assembly.s
+   Uses
+      None
+Comment: Lab_10_Tyler_Hu unused
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file Assembly.s
+   Uses
+      At line 2 in file Assembly.s
+Comment: __main used once
+loop 00000006
+
+Symbol: loop
+   Definitions
+      At line 9 in file Assembly.s
+   Uses
+      At line 13 in file Assembly.s
+Comment: loop used once
+stop 0000000E
+
+Symbol: stop
+   Definitions
+      At line 15 in file Assembly.s
+   Uses
+      At line 15 in file Assembly.s
+Comment: stop used once
+4 symbols
+340 symbols in table
